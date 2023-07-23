@@ -5,7 +5,7 @@ This simple vue3 Simple sliders
 
 ## Live Link
 
-- [@Live Link](https://vu3-slide-biglzsdfa-siam786.vercel.app/)
+- [@Live Link](https://vu3-slide.vercel.app)
 
 
 ## Screenshots
