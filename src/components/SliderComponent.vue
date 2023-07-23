@@ -1,24 +1,25 @@
 <template>
   <div class="carousel">
-    <transition name="carousel-fade">
-      <div class="carousel-inner">
-        <div v-for="(item, index) in carouselItems" :key="index" :class="['carousel-item', index === activeIndex ? 'active' : '']">
-          <img :src="item.image" class="d-block w-100" alt="Slide Image" v-show="isActiveSlide(index)">
+    <h3 class="fs-1 text-gr mb-4 fw-bold text-uppercase">{{ title }}</h3>
+    <TransitionGroup  name="carousel-fade">
+      <div class="carousel-inner rounded ">
+        <div v-for="(item, index) in carouselItems" :key="index" :class="['carousel-item', index === activeIndex ? 'active' : '']" class="image-slider">
+          <img :src="item.image" class="img-fluid img-rounded shadow-4-strong d-block w-100" alt="Slide Image" v-show="isActiveSlide(index)">
           <div class="carousel-caption d-none d-md-block">
             <h5>{{ item.title }}</h5>
             <p>{{ item.caption }}</p>
           </div>
         </div>
       </div>
-    </transition>
+    </TransitionGroup >
 
     <a class="carousel-control-prev" href="#" role="button" @click="prevSlide">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
+      <!-- <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
+      <i class="fa-solid fa-arrow-left" style="color: #ededed;"></i>
     </a>
     <a class="carousel-control-next" href="#" role="button" @click="nextSlide">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
+      <!-- <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
+      <i class="fa-solid fa-arrow-right" style="color: #ededed;"></i>
     </a>
   </div>
 </template>
@@ -28,22 +29,37 @@ import { ref, onMounted, onUnmounted } from 'vue';
 
 const activeIndex = ref(0);
 const autoplayInterval = ref(null);
-
-const carouselItems = [
+const title='Vue 3 Slider'
+let carouselItems = [
   {
-    image: 'https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    title: 'First Slide',
-    caption: 'Nulla vitae elit libero, a pharetra augue mollis interdum.',
+    image: 'https://images.pexels.com/photos/2865987/pexels-photo-2865987.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    title: 'Refreshing Watermelon',
+    caption: 'A juicy watermelon slice, perfect for summer.',
   },
   {
-    image: 'https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    title: 'Second Slide',
-    caption: 'Nulla vitae elit libero, a pharetra augue mollis interdum.',
+    image: 'https://images.pexels.com/photos/4022107/pexels-photo-4022107.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    title: 'Vibrant Orange',
+    caption: 'A ripe orange with a burst of vitamin C.',
   },
   {
-    image: 'https://images.pexels.com/photos/1775043/pexels-photo-1775043.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    title: 'Third Slide',
-    caption: 'Nulla vitae elit libero, a pharetra augue mollis interdum.',
+    image: 'https://images.pexels.com/photos/7195273/pexels-photo-7195273.jpeg?auto=compress&cs=tinysrgb&w=1260',
+    title: 'Exotic Pineapple',
+    caption: 'A tropical pineapple that transports you to an island getaway.',
+  },
+  {
+    image: 'https://images.pexels.com/photos/3085062/pexels-photo-3085062.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    title: 'Sweet Grapes',
+    caption: 'A bunch of juicy grapes, nature\'s candy.',
+  },
+  {
+    image: 'https://images.pexels.com/photos/1128678/pexels-photo-1128678.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    title: 'Juicy Berries',
+    caption: 'A mix of delicious berries full of antioxidants.',
+  },
+  {
+    image: 'https://images.pexels.com/photos/8523860/pexels-photo-8523860.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    title: 'Tropical Mango',
+    caption: 'A ripe mango, the king of fruits in the tropics.',
   },
 ];
 
@@ -72,7 +88,7 @@ onUnmounted(() => {
 const startAutoplay = () => {
   autoplayInterval.value = setInterval(() => {
     nextSlide();
-  }, 5000); // Change slide every 3 seconds (adjust as needed)
+  }, 3000); // Change slide every 3 seconds (adjust as needed)
 };
 
 const stopAutoplay = () => {
@@ -132,15 +148,68 @@ const stopAutoplay = () => {
 .carousel-control-next {
   right: 1rem;
 }
+.text-gr{
+  background: #F85032;
+background: -webkit-repeating-radial-gradient(circle farthest-corner at bottom right, #F85032 16%, #F16F5C 42%, #F6290C 51%, #F02F17 65%, #E73827 100%);
+background: -moz-repeating-radial-gradient(circle farthest-corner at bottom right, #F85032 16%, #F16F5C 42%, #F6290C 51%, #F02F17 65%, #E73827 100%);
+background: repeating-radial-gradient(circle farthest-corner at bottom right, #F85032 16%, #F16F5C 42%, #F6290C 51%, #F02F17 65%, #E73827 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
 
-/* Fade-in and fade-out effect during transition */
-.carousel-fade-enter-active,
-.carousel-fade-leave-active {
-  transition: opacity 1s;
 }
 
-.carousel-fade-enter,
-.carousel-fade-leave-to /* .carousel-fade-leave-active in <2.1.8 */ {
-  opacity: 0;
+
+.image-slider img:first-child {
+  opacity: 1; /* Show the first image initially */
+}
+
+@keyframes slide {
+	0% {
+		animation-timing-function: ease-in;
+		opacity: 1;
+		transform: translateY(45px);
+	}
+
+	24% {
+		opacity: 1;
+	}
+
+	40% {
+		animation-timing-function: ease-in;
+		transform: translateY(24px);
+	}
+
+	65% {
+		animation-timing-function: ease-in;
+		transform: translateY(12px);
+	}
+
+	82% {
+		animation-timing-function: ease-in;
+		transform: translateY(6px);
+	}
+
+	93% {
+		animation-timing-function: ease-in;
+		transform: translateY(4px);
+	}
+
+	25%,
+	55%,
+	75%,
+	87% {
+		animation-timing-function: ease-out;
+		transform: translateY(0px);
+	}
+
+	100% {
+		animation-timing-function: ease-out;
+		opacity: 1;
+		transform: translateY(0px);
+	}
+}
+.image-slider {
+  /* animation: slide 9s infinite linear; Adjust the animation duration */
+  animation: slide 2s ease-out 0s 1 normal both;
 }
 </style>
