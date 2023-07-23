@@ -1,7 +1,7 @@
 
 # Simple - Vu3 SLIDER
 
-This simple vue3 Simple slider
+This simple vue3 Simple sliders
 
 ## Live Link
 
